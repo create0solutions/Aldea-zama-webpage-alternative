@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Zama — Aldea Zama, Tulum</title>
+<meta name="description" content="A two-bedroom retreat in Aldea Zama, Tulum. Palm shade, a curved pool, and five minutes from Tulum's best tables. Hosted by Karla &amp; Max.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400..600&family=Karla:wght@400;500;600;700;800&family=Parisienne&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#F7F3E9',
+          ink:   '#211F1A',
+          sage: {
+            DEFAULT: '#8FA173',
+            deep:    '#4E5C38',
+            pale:    '#E9EADA',
+          },
+          sand: '#C9A667',
+          teal: {
+            DEFAULT: '#20463F',
+            light:   '#2C5751',
+          },
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          script:  ['"Parisienne"', 'cursive'],
+          sans:    ['Karla', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root{
+    --shadow-sage: 0 1px 2px rgba(33,31,26,.06), 0 12px 28px -8px rgba(78,92,56,.35);
+    --shadow-teal: 0 1px 2px rgba(0,0,0,.15), 0 16px 32px -10px rgba(32,70,63,.55);
+  }
+  html{ scroll-behavior:smooth; }
+  body{ background:#F7F3E9; }
+
+  /* grain texture, used sparingly on dark bands for depth */
+  .grain{ position:relative; isolation:isolate; }
+  .grain::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .grain > *{ position:relative; z-index:1; }
+
+  .shadow-sage-lg{ box-shadow:var(--shadow-sage); }
+  .shadow-teal-lg{ box-shadow:var(--shadow-teal); }
+
+  /* flanking-rule heading, lifted from the guide's "Places to see / Emergency" style */
+  .flanked{ display:flex; align-items:center; justify-content:center; gap:1.25rem; }
+  .flanked::before, .flanked::after{ content:""; height:1px; width:2.5rem; background:currentColor; opacity:.35; }
+  @media (min-width:640px){ .flanked::before, .flanked::after{ width:5rem; } }
+
+  /* photo duotone treatment */
+  .photo-frame{ position:relative; overflow:hidden; }
+  .photo-frame img{ display:block; width:100%; height:100%; object-fit:cover; filter:saturate(1.05); }
+  .photo-frame::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(32,70,63,0) 55%, rgba(20,30,20,.55) 100%);
+  }
+  .photo-frame.duo::before{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:#4E5C38; mix-blend-mode:multiply; opacity:.18;
+  }
+
+  details > summary{ list-style:none; cursor:pointer; }
+  details > summary::-webkit-details-marker{ display:none; }
+  details .chev{ transition:transform .25s cubic-bezier(.2,.8,.2,1); }
+  details[open] .chev{ transform:rotate(45deg); }
+
+  @keyframes hero-in{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+  .hero-in > *{ opacity:0; animation:hero-in .8s cubic-bezier(.2,.8,.2,1) forwards; }
+  .hero-in > *:nth-child(1){ animation-delay:.05s; }
+  .hero-in > *:nth-child(2){ animation-delay:.15s; }
+  .hero-in > *:nth-child(3){ animation-delay:.25s; }
+  .hero-in > *:nth-child(4){ animation-delay:.35s; }
+  .hero-in > *:nth-child(5){ animation-delay:.45s; }
+  @media (prefers-reduced-motion: reduce){
+    .hero-in > *{ opacity:1; animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  .btn{ transition:transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s cubic-bezier(.2,.8,.2,1), background-color .2s ease; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn:active{ transform:translateY(0); }
+  .btn:focus-visible{ outline:2px solid #C9A667; outline-offset:3px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible{ outline:2px solid #C9A667; outline-offset:3px; border-radius:2px; }
+
+  .stamp-ring{
+    border-radius:9999px; border:1px dashed rgba(247,243,233,.4);
+  }
+
+  .nav-link{ position:relative; }
+  .nav-link::after{
+    content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px; background:#C9A667;
+    transform:scaleX(0); transform-origin:left; transition:transform .25s cubic-bezier(.2,.8,.2,1);
+  }
+  .nav-link:hover::after{ transform:scaleX(1); }
+</style>
+</head>
+<body class="font-sans text-ink antialiased">
+
+<!-- ================= NAV ================= -->
+<header id="site-nav" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-20">
+    <a href="#top" class="flex items-center gap-3">
+      <img src="brand_assets/logo_clean_transparent.png" alt="Real Zama crest" class="h-10 w-auto">
+      <span class="leading-tight">
+        <span class="block font-display font-semibold tracking-[0.18em] text-sm">REAL ZAMA</span>
+        <span class="block text-[11px] tracking-[0.15em] text-sage-deep/80 uppercase">Aldea Zama · Tulum</span>
+      </span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm tracking-wide">
+      <a href="#stay" class="nav-link">The Stay</a>
+      <a href="#hosts" class="nav-link">Hosts</a>
+      <a href="#amenities" class="nav-link">Amenities</a>
+      <a href="#location" class="nav-link">Location</a>
+      <a href="#explore" class="nav-link">Explore</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="https://wa.me/529841575841" target="_blank" rel="noopener"
+         class="btn hidden sm:inline-flex items-center gap-2 bg-teal text-paper text-sm font-medium tracking-wide px-5 py-2.5 rounded-full shadow-sage-lg hover:bg-teal-light">
+        Check Availability
+      </a>
+      <button id="menu-btn" aria-label="Open menu" aria-expanded="false" class="md:hidden p-2 -mr-2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-paper border-t border-sage/30 shadow-sage-lg">
+    <div class="px-6 py-6 flex flex-col gap-5 text-base">
+      <a href="#stay" class="mobile-link">The Stay</a>
+      <a href="#hosts" class="mobile-link">Hosts</a>
+      <a href="#amenities" class="mobile-link">Amenities</a>
+      <a href="#location" class="mobile-link">Location</a>
+      <a href="#explore" class="mobile-link">Explore</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <a href="https://wa.me/529841575841" target="_blank" rel="noopener" class="btn inline-flex justify-center items-center bg-teal text-paper font-medium px-5 py-3 rounded-full mt-2">Check Availability</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="top" class="relative min-h-[100svh] flex items-end grain">
+  <div class="absolute inset-0 photo-frame duo">
+    <img src="photos/hero-pool-palapa.jpg" alt="Curved pool and palapa at Real Zama, Aldea Zama">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-ink/10"></div>
+
+  <div class="hero-in relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-16 sm:pb-24 pt-40 w-full text-paper">
+    <p class="font-script text-3xl sm:text-4xl text-sand mb-3">Time to relax &amp; enjoy</p>
+    <h1 class="font-display font-semibold text-[13vw] sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em] max-w-4xl">
+      Welcome to<br>Real&nbsp;Zama
+    </h1>
+    <p class="mt-6 max-w-xl text-base sm:text-lg text-paper/85 leading-relaxed">
+      A quiet two-bedroom retreat in Aldea Zama — palm shade, a curved pool, and a five-minute walk
+      from some of Tulum's best restaurants.
+    </p>
+
+    <div class="mt-9 flex flex-wrap items-center gap-4">
+      <a href="https://wa.me/529841575841" target="_blank" rel="noopener"
+         class="btn inline-flex items-center gap-2 bg-sand text-ink font-semibold px-7 py-3.5 rounded-full shadow-sage-lg hover:brightness-105">
+        Check Availability
+      </a>
+      <a href="#stay" class="btn inline-flex items-center gap-2 border border-paper/50 text-paper px-7 py-3.5 rounded-full hover:bg-paper/10">
+        See the Apartment
+      </a>
+    </div>
+
+    <p class="mt-8 text-xs tracking-[0.2em] uppercase text-paper/60">
+      Hosted by Karla &amp; Max · Welcoming guests to Tulum for 5 years
+    </p>
+  </div>
+</section>
+
+<!-- ================= QUICK FACTS STRIP ================= -->
+<section class="bg-sage text-ink">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap gap-x-10 gap-y-3 justify-center text-sm sm:text-[15px] font-medium tracking-wide">
+    <span>2 Bedroom Apartment</span>
+    <span class="opacity-40">·</span>
+    <span>Pool &amp; Palapa</span>
+    <span class="opacity-40">·</span>
+    <span>Smart TV + Fast Wifi</span>
+    <span class="opacity-40">·</span>
+    <span>2.5 km to the Beach</span>
+    <span class="opacity-40">·</span>
+    <span>Private Parking</span>
+  </div>
+</section>
+
+<!-- ================= THE STAY ================= -->
+<section id="stay" class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="grid lg:grid-cols-2 gap-14 items-center">
+    <div >
+      <p class="font-script text-2xl text-sage-deep mb-1">A home base, not just a room</p>
+      <h2 class="font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] leading-tight">
+        Unit 103 at<br>Real&nbsp;Zama
+      </h2>
+      <p class="mt-6 text-[17px] leading-[1.7] text-ink/80 max-w-lg">
+        Real Zama is a low-rise complex wrapped in palm and fan-leaf greenery, tucked into
+        Calle Cabah in Aldea Zama — the residential heart between Tulum town and the beach.
+        Wake up to a curved pool shaded by a palapa, fall asleep to jungle sounds, and step
+        out the gate to some of Tulum's best tables.
+      </p>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink/80 max-w-lg">
+        Inside, a smart TV with every streaming service pre-loaded, independent air
+        conditioning in every room, and a washer &amp; dryer at your disposal — the everyday
+        comforts that make a week feel like home.
+      </p>
+      <ul class="mt-8 space-y-2 text-sm text-sage-deep font-medium">
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sage-deep"></span>Two secured entrances, gated complex</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sage-deep"></span>Shared pool &amp; palapa lounge</li>
+        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sage-deep"></span>Parking available on-site</li>
+      </ul>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div class="photo-frame duo rounded-2xl shadow-sage-lg aspect-[4/5]">
+        <img src="photos/entrance-sign.jpg" alt="Real Zama entrance sign surrounded by palms">
+      </div>
+      <div class="photo-frame duo rounded-2xl shadow-sage-lg aspect-[4/5]">
+        <img src="photos/pool-aerial.jpg" alt="Aerial view of the curved pool and palapa at Real Zama">
+      </div>
+      <div class="photo-frame duo rounded-2xl shadow-sage-lg aspect-[4/5]">
+        <img src="photos/bedroom-king.jpg" alt="King bedroom at Real Zama, unit 103">
+      </div>
+      <div class="photo-frame duo rounded-2xl shadow-sage-lg aspect-[4/5]">
+        <img src="photos/living-room.jpg" alt="Living room at Real Zama, unit 103">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOSTS ================= -->
+<section id="hosts" class="bg-sage-pale">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-32 grid lg:grid-cols-[320px_1fr] gap-14 items-start">
+    <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
+      <div class="photo-frame duo rounded-full shadow-sage-lg w-56 h-56 sm:w-64 sm:h-64">
+        <img src="https://placehold.co/500x500/4E5C38/f7f3e9" alt="Karla and Max, hosts of Real Zama">
+      </div>
+      <p class="mt-6 font-display text-2xl">Karla &amp; Max</p>
+      <p class="text-sm text-sage-deep tracking-wide uppercase mt-1">Your hosts since 2021</p>
+    </div>
+
+    <div >
+      <p class="font-script text-2xl text-sage-deep mb-1">Meet your hosts</p>
+      <h2 class="font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] leading-tight">
+        Welcome to our<br>Tulum paradise
+      </h2>
+      <p class="mt-6 text-[17px] leading-[1.7] text-ink/80 max-w-2xl">
+        Karla moved to the Riviera Maya seven years ago and instantly fell for the turquoise
+        water and the rhythm of life by the beach — but it was Tulum that truly stole her heart.
+        Max, an adventurous Austrian, arrived on vacation and never really left. Love blossomed,
+        and together we made this dream our reality: welcoming guests into a little piece of the
+        magic that changed our own lives.
+      </p>
+      <p class="mt-4 text-[17px] leading-[1.7] text-ink/80 max-w-2xl">
+        Over the last five years, hosting has become our passion — personal recommendations,
+        thoughtful touches, and a spotless home, every time.
+      </p>
+
+      <blockquote class="mt-9 border-l-2 border-sand pl-6 font-display italic text-xl sm:text-2xl text-teal max-w-xl">
+        “Mi casa es su casa — we hope you feel at home from the moment you arrive.”
+      </blockquote>
+
+      <div class="mt-8 flex flex-wrap gap-8 text-sm text-sage-deep">
+        <div><span class="block font-display text-2xl text-ink">7</span>years in the Riviera Maya</div>
+        <div><span class="block font-display text-2xl text-ink">5</span>years hosting guests</div>
+        <div><span class="block font-display text-2xl text-ink">2</span>hosts, always reachable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AMENITIES ================= -->
+<section id="amenities" class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="text-center max-w-2xl mx-auto mb-16">
+    <span class="inline-block bg-sage text-ink text-xs font-bold tracking-[0.2em] uppercase px-4 py-2 rounded-full">Getting Comfortable</span>
+    <h2 class="font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] mt-6">Everything you need, already set up</h2>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Netflix -->
+    <div class="bg-white rounded-2xl p-7 shadow-sage-lg text-center">
+      <div class="mx-auto w-16 h-16 rounded-full bg-sage-pale flex items-center justify-center text-sage-deep">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 18v3"/><path d="M10 9l4 3-4 3V9z" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <h3 class="font-display text-lg mt-5">Netflix &amp; Chill</h3>
+      <p class="text-sm text-ink/70 mt-2 leading-relaxed">Every major streaming service, pre-installed. Wifi's already connected — just log in.</p>
+    </div>
+    <!-- AC -->
+    <div class="bg-white rounded-2xl p-7 shadow-sage-lg text-center">
+      <div class="mx-auto w-16 h-16 rounded-full bg-sage-pale flex items-center justify-center text-sage-deep">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11"/></svg>
+      </div>
+      <h3 class="font-display text-lg mt-5">Air Conditioning</h3>
+      <p class="text-sm text-ink/70 mt-2 leading-relaxed">Every room has its own remote — bedrooms on the nightstand, living room on the couch table.</p>
+    </div>
+    <!-- Laundry -->
+    <div class="bg-white rounded-2xl p-7 shadow-sage-lg text-center">
+      <div class="mx-auto w-16 h-16 rounded-full bg-sage-pale flex items-center justify-center text-sage-deep">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="5"/><circle cx="12" cy="13" r="2"/><path d="M8 6.5h.01M11 6.5h.01"/></svg>
+      </div>
+      <h3 class="font-display text-lg mt-5">Laundry</h3>
+      <p class="text-sm text-ink/70 mt-2 leading-relaxed">A washer &amp; dryer at your disposal, tucked behind the wooden blinds by the cleaning supplies.</p>
+    </div>
+    <!-- Parking -->
+    <div class="bg-white rounded-2xl p-7 shadow-sage-lg text-center">
+      <div class="mx-auto w-16 h-16 rounded-full bg-sage-pale flex items-center justify-center text-sage-deep">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 16l1.5-6a2 2 0 012-1.5h7a2 2 0 012 1.5L19 16"/><rect x="4" y="16" width="16" height="4" rx="1.5"/><path d="M7 20v-1M17 20v-1"/></svg>
+      </div>
+      <h3 class="font-display text-lg mt-5">Private Parking</h3>
+      <p class="text-sm text-ink/70 mt-2 leading-relaxed">A spot is yours on-site for the length of your stay — no need to hunt for street parking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOCATION ================= -->
+<section id="location" class="bg-teal text-paper grain">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-32 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="order-2 lg:order-1">
+      <p class="font-script text-2xl text-sand mb-1">Where you'll be staying</p>
+      <h2 class="font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] leading-tight">Aldea Zama:<br>your base in Tulum</h2>
+      <p class="mt-6 text-[17px] leading-[1.7] text-paper/80 max-w-lg">
+        Aldea Zama is a thoughtfully designed community between Tulum town and the beach —
+        upscale residences, boutique restaurants, and tree-lined streets, all within a
+        24/7-secured, well-lit neighborhood.
+      </p>
+
+      <div class="mt-9 grid sm:grid-cols-2 gap-x-8 gap-y-5 text-sm">
+        <div class="flex gap-3">
+          <svg class="shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A667" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 0114 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span class="text-paper/85">1.5 miles (2.5 km) to Tulum's beaches — an easy bike ride</span>
+        </div>
+        <div class="flex gap-3">
+          <svg class="shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A667" stroke-width="1.8"><path d="M12 3l8 4-8 4-8-4 8-4zM4 11l8 4 8-4M4 15l8 4 8-4"/></svg>
+          <span class="text-paper/85">Safari Tulum, Hunab Rooftop &amp; Nikkori all a short walk away</span>
+        </div>
+        <div class="flex gap-3">
+          <svg class="shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A667" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span class="text-paper/85">A local cenote, yoga studios &amp; gyms, all within Aldea Zama</span>
+        </div>
+        <div class="flex gap-3">
+          <svg class="shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A667" stroke-width="1.8"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg>
+          <span class="text-paper/85">24/7 security and well-lit streets — Aldea Zama is one of the safest areas in Tulum</span>
+        </div>
+      </div>
+
+      <p class="mt-9 text-sm text-paper/60 leading-relaxed max-w-lg">
+        Exact door codes and step-by-step arrival instructions are sent securely once your stay is confirmed.
+      </p>
+    </div>
+
+    <div class="order-1 lg:order-2 relative">
+      <div class="photo-frame rounded-2xl shadow-teal-lg aspect-[4/5]">
+        <img src="photos/aldea-zama-entrance.jpg" alt="Stone entrance sign for Aldea Zama, Tulum">
+      </div>
+      <div class="absolute -bottom-6 -left-6 bg-paper text-ink rounded-2xl px-6 py-4 shadow-sage-lg hidden sm:block">
+        <p class="text-xs tracking-[0.2em] uppercase text-sage-deep">Address</p>
+        <p class="font-display text-sm mt-1 max-w-[220px]">Calle Cabah, Aldea Zama<br>77760 Tulum, Q.R., México</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPLORE TULUM ================= -->
+<section id="explore" class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="text-center mb-16">
+    <h2 class="flanked font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] text-sage-deep">Explore Tulum</h2>
+    <p class="font-script text-2xl text-sage-deep mt-2">Like a local</p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="photo-frame duo rounded-2xl shadow-sage-lg overflow-hidden group">
+      <img src="photos/explore-ruins.jpg" alt="Tulum Mayan ruins overlooking the Caribbean sea" class="aspect-[3/4] group-hover:scale-105 transition-transform duration-500">
+      <div class="absolute inset-x-0 bottom-0 z-[2] p-6 text-paper">
+        <h3 class="font-display text-2xl">Ruins &amp; Cenotes</h3>
+        <p class="text-sm text-paper/85 mt-2 leading-relaxed">The Castillo above the Caribbean cliffs, plus our favorites: Gran Cenote, Dos Ojos &amp; Calavera.</p>
+      </div>
+    </div>
+    <div class="photo-frame duo rounded-2xl shadow-sage-lg overflow-hidden group">
+      <img src="photos/explore-tacos.webp" alt="Tacos at a local Tulum restaurant" class="aspect-[3/4] group-hover:scale-105 transition-transform duration-500">
+      <div class="absolute inset-x-0 bottom-0 z-[2] p-6 text-paper">
+        <h3 class="font-display text-2xl">Where to Eat</h3>
+        <p class="text-sm text-paper/85 mt-2 leading-relaxed">Our table is Casa Jaguar. Also try Rosa Negra, Heartwood, and MEZE for an Aegean night.</p>
+      </div>
+    </div>
+    <div class="photo-frame duo rounded-2xl shadow-sage-lg overflow-hidden group">
+      <img src="photos/explore-beach.jpg" alt="Sunset over a Tulum beach with palm trees" class="aspect-[3/4] group-hover:scale-105 transition-transform duration-500">
+      <div class="absolute inset-x-0 bottom-0 z-[2] p-6 text-paper">
+        <h3 class="font-display text-2xl">Beach Clubs</h3>
+        <p class="text-sm text-paper/85 mt-2 leading-relaxed">Papaya Playa Project, Nomade, and Habitas — sun loungers, sea-to-table fare, day into night.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-center text-sm text-ink/60 mt-10 max-w-xl mx-auto leading-relaxed">
+    Akumal's green sea turtles and the powder-white beaches of Tulum are both an easy drive away —
+    ask us for the current seaweed forecast before you go.
+  </p>
+</section>
+
+<!-- ================= HOUSE RULES ================= -->
+<section class="bg-sage-pale">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="inline-block bg-teal text-paper text-xs font-bold tracking-[0.2em] uppercase px-4 py-2 rounded-full">Good to Know</span>
+      <h2 class="font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] mt-6">A few house rules</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-7 shadow-sage-lg">
+        <h3 class="font-display text-lg">No Smoking Indoors</h3>
+        <p class="text-sm text-ink/70 mt-2 leading-relaxed">Smoking is welcome in the common outdoor areas.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 shadow-sage-lg">
+        <h3 class="font-display text-lg">No Parties</h3>
+        <p class="text-sm text-ink/70 mt-2 leading-relaxed">And please keep noise down after 10pm, out of respect for our neighbors.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-7 shadow-sage-lg">
+        <h3 class="font-display text-lg">Tap Water</h3>
+        <p class="text-sm text-ink/70 mt-2 leading-relaxed">Not safe to drink — purified water is available in the apartment.</p>
+      </div>
+    </div>
+    <p class="text-center font-script text-2xl text-sage-deep mt-12">Mi casa es su casa.</p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="max-w-3xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <h2 class="font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] text-center mb-14">Frequently asked</h2>
+
+  <div class="space-y-3">
+    <details class="group bg-white rounded-2xl shadow-sage-lg overflow-hidden" open>
+      <summary class="flex items-center justify-between gap-4 p-6 font-display text-lg">
+        What currency should I bring?
+        <span class="chev shrink-0 text-sage-deep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <p class="px-6 pb-6 text-sm text-ink/70 leading-relaxed">Tulum runs on Mexican pesos. Carry some cash — not every restaurant takes card, and ATMs can be hard to find.</p>
+    </details>
+
+    <details class="group bg-white rounded-2xl shadow-sage-lg overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 p-6 font-display text-lg">
+        Will I get by in English?
+        <span class="chev shrink-0 text-sage-deep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <p class="px-6 pb-6 text-sm text-ink/70 leading-relaxed">Spanish is the official language, but you'll have no trouble getting by in English throughout Tulum town and Playa.</p>
+    </details>
+
+    <details class="group bg-white rounded-2xl shadow-sage-lg overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 p-6 font-display text-lg">
+        How do I get around?
+        <span class="chev shrink-0 text-sage-deep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <p class="px-6 pb-6 text-sm text-ink/70 leading-relaxed">Foot and bike cover most of Tulum beach and town. Uber doesn't operate here, but taxis are everywhere — agreeing on a price upfront is normal. For longer trips, renting a car or taking the ADO bus works well.</p>
+    </details>
+
+    <details class="group bg-white rounded-2xl shadow-sage-lg overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 p-6 font-display text-lg">
+        When's the best time to visit?
+        <span class="chev shrink-0 text-sage-deep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <p class="px-6 pb-6 text-sm text-ink/70 leading-relaxed">Tulum is warm and tropical year-round (75–90°F by day). There's no true bad season, though June–November brings the rainy/hurricane window.</p>
+    </details>
+
+    <details class="group bg-white rounded-2xl shadow-sage-lg overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 p-6 font-display text-lg">
+        How do I check availability or book?
+        <span class="chev shrink-0 text-sage-deep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+      </summary>
+      <p class="px-6 pb-6 text-sm text-ink/70 leading-relaxed">Message us your dates on WhatsApp or by email — Karla &amp; Max answer personally, usually within a few hours.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="relative bg-teal text-paper grain overflow-hidden">
+  <div class="absolute inset-0 photo-frame">
+    <img src="photos/explore-cenote.jpg" alt="" class="opacity-40">
+  </div>
+  <div class="absolute inset-0 bg-teal/80"></div>
+  <div class="relative max-w-3xl mx-auto px-5 sm:px-8 py-24 sm:py-32 text-center flex flex-col items-center">
+    <div class="stamp-ring w-24 h-24 flex items-center justify-center">
+      <img src="brand_assets/logo_clean_transparent.png" alt="" class="h-14 w-auto opacity-90" style="filter:invert(1) brightness(1.6)">
+    </div>
+    <p class="font-script text-3xl text-sand mt-8">Time to relax &amp; enjoy</p>
+    <h2 class="font-display font-semibold text-4xl sm:text-6xl tracking-[-0.02em] mt-3">Ready for Tulum?</h2>
+    <p class="mt-5 text-paper/80 max-w-md leading-relaxed">
+      Tell us your dates — we'll personally answer every message, usually within a few hours.
+    </p>
+
+    <div class="mt-9 flex flex-wrap justify-center gap-4">
+      <a href="https://wa.me/529841575841" target="_blank" rel="noopener"
+         class="btn inline-flex items-center gap-2 bg-sand text-ink font-semibold px-8 py-4 rounded-full shadow-sage-lg hover:brightness-105">
+        Message on WhatsApp
+      </a>
+      <a href="mailto:maxspeiserandkarlavillarroel@gmail.com"
+         class="btn inline-flex items-center gap-2 border border-paper/50 text-paper px-8 py-4 rounded-full hover:bg-paper/10">
+        Email Karla &amp; Max
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-ink text-paper/70">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-14 grid sm:grid-cols-[1fr_auto_auto] gap-10 text-sm">
+    <div>
+      <div class="flex items-center gap-3">
+        <img src="brand_assets/logo_clean_transparent.png" alt="Real Zama crest" class="h-8 w-auto" style="filter:invert(1) brightness(1.6)">
+        <span class="font-display text-paper text-lg">Real Zama</span>
+      </div>
+      <p class="mt-4 max-w-xs leading-relaxed">Unit 103, Real Zama · Calle Cabah, Aldea Zama<br>77760 Tulum, Q.R., México</p>
+    </div>
+    <div>
+      <p class="text-paper text-xs tracking-[0.2em] uppercase mb-4">Explore</p>
+      <ul class="space-y-2">
+        <li><a href="#stay" class="hover:text-paper">The Stay</a></li>
+        <li><a href="#amenities" class="hover:text-paper">Amenities</a></li>
+        <li><a href="#location" class="hover:text-paper">Location</a></li>
+        <li><a href="#faq" class="hover:text-paper">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-paper text-xs tracking-[0.2em] uppercase mb-4">Contact</p>
+      <ul class="space-y-2">
+        <li><a href="https://wa.me/529841575841" class="hover:text-paper">WhatsApp</a></li>
+        <li><a href="mailto:maxspeiserandkarlavillarroel@gmail.com" class="hover:text-paper">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-paper/10">
+    <p class="max-w-7xl mx-auto px-5 sm:px-8 py-6 text-xs text-paper/40">© 2026 Real Zama · Hosted by Karla &amp; Max</p>
+  </div>
+</footer>
+
+<script>
+  // sticky nav background on scroll
+  const nav = document.getElementById('site-nav');
+  const setNav = () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('bg-paper/95', 'backdrop-blur', 'shadow-sage-lg');
+    } else {
+      nav.classList.remove('bg-paper/95', 'backdrop-blur', 'shadow-sage-lg');
+    }
+  };
+  setNav();
+  window.addEventListener('scroll', setNav, { passive: true });
+
+  // mobile menu toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isOpen));
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a =>
+    a.addEventListener('click', () => mobileMenu.classList.add('hidden'))
+  );
+
+</script>
+</body>
+</html>

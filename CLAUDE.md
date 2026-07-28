@@ -46,6 +46,12 @@
 - **Spacing:** Use intentional, consistent spacing tokens — not random Tailwind steps.
 - **Depth:** Surfaces should have a layering system (base → elevated → floating), not all sit at the same z-plane.
 
+## Deployment Workflow
+- This repo is connected to GitHub (`create0solutions/Aldea-zama-webpage-alternative`) and deployed on Vercel.
+- Vercel auto-publishes on every push to the `main` branch — pushing **is** deploying to production.
+- When making changes: build and test on the local server (`http://localhost:3000`) first. Do not push to GitHub until the user has reviewed the changes locally and explicitly says they're happy with them.
+- Only commit and push once the user gives that go-ahead. After the push, Vercel will pick it up and publish automatically — no separate deploy step needed.
+
 ## Hard Rules
 - Do not add sections, features, or content not in the reference
 - Do not "improve" a reference design — match it
